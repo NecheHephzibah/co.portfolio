@@ -1,0 +1,1444 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chukwunonso Onovo — Data Scientist & Engineer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600;700;800&family=IBM+Plex+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+<style>
+    :root {
+      --bg: #F5F3EE;
+      --bg2: #EDEAE3;
+      --surface: #FFFFFF;
+      --surface2: #F9F7F4;
+      --border: rgba(0,0,0,0.08);
+      --border-strong: rgba(0,0,0,0.14);
+      --text-1: #1A1814;
+      --text-2: #4A4640;
+      --text-3: #8A8480;
+      --accent: #2F2F2F;
+      --accent-light: rgba(74,128,212,0.22);
+      --accent-dim: rgba(74,128,212,0.08);
+      --tag-bg: #EDE9E3;
+      --tag-text: #4A4640;
+      --nav-bg: rgba(245,243,238,0.88);
+      --serif: 'IBM Plex Mono', monospace;
+      --mono: 'IBM Plex Mono', monospace;
+      --sans: 'IBM Plex Mono', monospace;
+      --heading: 'Inter Tight', sans-serif;
+      --radius: 16px;
+      --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    [data-theme="dark"] {
+      --bg: #131210;
+      --bg2: #1C1A17;
+      --surface: #211F1B;
+      --surface2: #2A2722;
+      --border: rgba(255,255,255,0.07);
+      --border-strong: rgba(255,255,255,0.13);
+      --text-1: #F0EDE6;
+      --text-2: #B8B0A4;
+      --text-3: #6B6560;
+      --accent: #6D3B47;
+      --accent-light: rgba(50, 74, 106, 0.22);
+      --accent-dim: rgba(107,159,228,0.08);
+      --tag-bg: rgba(255,255,255,0.07);
+      --tag-text: #B8B0A4;
+      --nav-bg: rgba(19,18,16,0.9);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text-1);
+      line-height: 1.6;
+      min-height: 100vh;
+      transition: background var(--transition), color var(--transition);
+    }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      background: var(--nav-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      transition: background var(--transition);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px; height: 32px;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .nav-logo svg {
+      width: 28px; height: 28px;
+      fill: var(--accent);
+      transition: fill var(--transition);
+    }
+
+    .nav-center {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-center a {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      color: var(--text-3);
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-center a:hover { color: var(--accent); }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .theme-toggle {
+      width: 40px; height: 22px;
+      background: var(--surface2);
+      border: 1px solid var(--border-strong);
+      border-radius: 100px;
+      cursor: pointer;
+      position: relative;
+      transition: background var(--transition);
+      flex-shrink: 0;
+    }
+
+    .theme-toggle::after {
+      content: '';
+      position: absolute;
+      top: 3px; left: 3px;
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      background: var(--accent);
+      transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    [data-theme="dark"] .theme-toggle::after {
+      transform: translateX(18px);
+    }
+
+    .nav-contact {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.06em;
+      color: var(--accent);
+      text-decoration: none;
+      border: 1px solid var(--accent);
+      padding: 0.3rem 0.85rem;
+      border-radius: 100px;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .nav-contact:hover {
+      background: var(--accent);
+      color: white;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+      background: none;
+      border: none;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 22px; height: 1.5px;
+      background: var(--text-2);
+      transition: 0.3s;
+    }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 60px; left: 0; right: 0;
+      background: var(--nav-bg);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 1.5rem 2rem;
+      flex-direction: column;
+      gap: 1.25rem;
+      z-index: 199;
+    }
+
+    .mobile-menu.open { display: flex; }
+
+    .mobile-menu a {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-2);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .mobile-menu a:hover { color: var(--accent); }
+
+    /* HERO */
+    .hero-section {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 80px 2rem 5rem;
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse at 12% 18%, rgba(210, 230, 180, 0.55) 0%, transparent 48%),
+        radial-gradient(ellipse at 88% 82%, rgba(245, 185, 195, 0.5) 0%, transparent 48%),
+        radial-gradient(ellipse at 60% 10%, rgba(200, 220, 245, 0.38) 0%, transparent 40%),
+        radial-gradient(ellipse at 30% 85%, rgba(250, 210, 170, 0.3) 0%, transparent 38%),
+        #faf9f6;
+    }
+
+    [data-theme="dark"] .hero-section {
+      background:
+        radial-gradient(ellipse at 12% 18%, rgba(60, 90, 40, 0.35) 0%, transparent 48%),
+        radial-gradient(ellipse at 88% 82%, rgba(100, 40, 60, 0.35) 0%, transparent 48%),
+        radial-gradient(ellipse at 60% 10%, rgba(30, 55, 90, 0.3) 0%, transparent 40%),
+        radial-gradient(ellipse at 30% 85%, rgba(90, 55, 20, 0.25) 0%, transparent 38%),
+        var(--bg);
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 7rem;
+      align-items: center;
+      max-width: 980px;
+      width: 100%;
+    }
+
+    .hero-left { display: flex; justify-content: center; }
+
+    .hero-right {
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+    }
+
+    .hero-badge {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--accent-dim);
+      border: 1px solid var(--accent-light);
+      padding: 0.35rem 1rem;
+      border-radius: 100px;
+      display: inline-block;
+      align-self: flex-start;
+    }
+
+    .hero-avatar {
+      width: 350px; height: 470px;
+      border-radius: 20px;
+      background: var(--accent-dim);
+      border: 2px solid var(--accent-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--heading);
+      font-size: 5rem;
+      font-weight: 700;
+      color: var(--accent);
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .hero-avatar img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      border-radius: inherit;
+    }
+
+    .hero-name {
+      font-family: var(--heading);
+      font-size: clamp(2rem, 5vw, 4rem);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      color: var(--text-1);
+    }
+
+    .hero-name .accent { color: var(--accent); }
+
+    .hero-subtitle {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      color: var(--text-3);
+      letter-spacing: 0.04em;
+      line-height: 1.85;
+    }
+
+    .hero-socials {
+      display: flex;
+      gap: 0.55rem;
+      flex-wrap: wrap;
+    }
+
+    .social-pill {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-2);
+      text-decoration: none;
+      border: 1px solid var(--border-strong);
+      padding: 0.4rem 0.9rem;
+      border-radius: 100px;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+      background: var(--surface);
+    }
+
+    .social-pill:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-dim);
+    }
+
+    .upload-photo-btn {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.06em;
+      color: var(--text-3);
+      cursor: pointer;
+      align-self: flex-start;
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      color: var(--text-3);
+      text-transform: uppercase;
+    }
+
+    .scroll-line {
+      width: 1px; height: 40px;
+      background: linear-gradient(to bottom, var(--accent), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.4; transform: scaleY(1); }
+      50% { opacity: 1; transform: scaleY(1.15); }
+    }
+
+    .container {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .page-section { padding: 6rem 0; }
+
+    .section-eyebrow {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: var(--heading);
+      font-size: clamp(1.6rem, 3.5vw, 2.6rem);
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.03em;
+      color: var(--text-1);
+      margin-bottom: 3rem;
+    }
+
+    .section-title .accent { color: var(--accent); }
+
+    .section-divider {
+      height: 1px;
+      background: var(--border);
+      max-width: 1140px;
+      margin: 0 auto;
+    }
+
+    /* ABOUT */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .about-text {
+      font-size: 1.05rem;
+      color: var(--text-2);
+      line-height: 1.85;
+    }
+
+    .about-right { display: flex; flex-direction: column; gap: 1.25rem; }
+
+    .location-card {
+      background: var(--accent-dim);
+      border: 1px solid var(--accent-light);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .location-text {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--accent);
+      letter-spacing: 0.04em;
+    }
+
+    .location-sub {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      color: var(--accent);
+      opacity: 0.65;
+      margin-top: 2px;
+    }
+
+    .skills-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+    }
+
+    .skills-label {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-bottom: 1rem;
+    }
+
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+
+    .skill-tag {
+      font-family: var(--mono);
+      font-size: 0.67rem;
+      padding: 0.35rem 0.8rem;
+      border-radius: 100px;
+      background: var(--tag-bg);
+      color: var(--tag-text);
+      transition: background 0.2s, color 0.2s;
+      cursor: default;
+    }
+
+    .skill-tag:hover {
+      background: var(--accent-dim);
+      color: var(--accent);
+    }
+
+    /* PROJECTS */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: transform 0.3s ease, border-color 0.3s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .project-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent-light);
+    }
+
+    .project-thumb {
+      width: 100%; aspect-ratio: 16/9;
+      background: var(--bg2);
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+
+    /* when a real image is used as the thumb bg */
+    .project-thumb.has-image {
+      background-size: cover;
+      background-position: center;
+    }
+
+    .project-thumb.has-image .project-thumb-grid { opacity: 0; }
+
+    .project-thumb-grid {
+      position: absolute; inset: 0;
+      background-image:
+        repeating-linear-gradient(0deg, var(--border) 0, var(--border) 1px, transparent 1px, transparent 36px),
+        repeating-linear-gradient(90deg, var(--border) 0, var(--border) 1px, transparent 1px, transparent 36px);
+    }
+
+    .project-thumb-label {
+      font-family: var(--mono);
+      font-size: 0.875rem;
+      color: var(--text-3);
+      z-index: 1;
+      text-align: center;
+      padding: 0 1rem;
+    }
+
+    /* hide label when there's a real image */
+    .project-thumb.has-image .project-thumb-label { display: none; }
+
+    .project-num {
+      position: absolute; bottom: 1rem; right: 1rem;
+      font-family: var(--mono);
+      font-size: 0.58rem; letter-spacing: 0.1em;
+      color: var(--text-3); z-index: 1;
+    }
+
+    .project-body {
+      padding: 1.5rem;
+      display: flex; flex-direction: column;
+      gap: 0.85rem; flex: 1;
+    }
+
+    .project-header {
+      display: flex; align-items: flex-start;
+      justify-content: space-between; gap: 1rem;
+    }
+
+    .project-title {
+      font-family: var(--heading);
+      font-size: 1rem; font-weight: 600;
+      line-height: 1.3;
+      color: var(--text-1);
+    }
+
+    .project-actions { display: flex; gap: 0.4rem; align-items: center; }
+
+    .project-link-btn {
+      width: 32px; height: 32px;
+      border: 1px solid var(--border-strong);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      text-decoration: none; color: var(--text-3);
+      font-size: 0.8rem; flex-shrink: 0;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+
+    .project-link-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-dim);
+    }
+
+    /* ── DELETE BUTTON ── */
+    .project-delete-btn {
+      width: 32px; height: 32px;
+      border: 1px solid var(--border-strong);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      background: none; cursor: pointer;
+      color: var(--text-3);
+      font-size: 0.78rem; flex-shrink: 0;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+
+    .project-delete-btn:hover {
+      border-color: #e05;
+      color: #e05;
+      background: rgba(238, 0, 85, 0.06);
+    }
+
+    .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
+    .project-tag {
+      font-family: var(--mono);
+      font-size: 0.6rem; padding: 0.25rem 0.6rem;
+      border-radius: 100px;
+      background: var(--tag-bg); color: var(--tag-text);
+    }
+
+    .project-desc {
+      font-size: 0.84rem; color: var(--text-2); line-height: 1.75;
+    }
+
+    .project-card.add-card {
+      border-style: dashed; background: transparent;
+    }
+
+    .add-inner {
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      min-height: 240px; gap: 0.75rem;
+    }
+
+    .add-circle {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      border: 1.5px dashed var(--border-strong);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.25rem; color: var(--text-3);
+    }
+
+    .add-label {
+      font-family: var(--mono); font-size: 0.65rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--text-3);
+    }
+
+    /* EXPERIENCE */
+    .exp-list { display: flex; flex-direction: column; }
+
+    .exp-item {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 2.5rem;
+      padding: 2.5rem 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .exp-item:last-child { border-bottom: 1px solid var(--border); }
+
+    .exp-left { display: flex; flex-direction: column; gap: 0.3rem; padding-top: 0.2rem; }
+
+    .exp-date {
+      font-family: var(--mono); font-size: 0.68rem;
+      color: var(--accent); letter-spacing: 0.05em;
+    }
+
+    .exp-company {
+      font-family: var(--mono); font-size: 0.65rem;
+      color: var(--text-3); line-height: 1.4;
+    }
+
+    .exp-role {
+      font-family: var(--heading); font-size: 1.25rem; font-weight: 600;
+      color: var(--text-1); margin-bottom: 0.85rem; line-height: 1.3;
+    }
+
+    .exp-desc {
+      font-size: 0.875rem; color: var(--text-2);
+      line-height: 1.8; margin-bottom: 1rem;
+    }
+
+    .exp-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
+    .exp-tag {
+      font-family: var(--mono); font-size: 0.6rem;
+      padding: 0.25rem 0.65rem; border-radius: 100px;
+      background: var(--tag-bg); color: var(--tag-text);
+    }
+
+    /* EDUCATION */
+    .edu-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+    }
+
+    .edu-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+      display: flex; flex-direction: column; gap: 0.75rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .edu-card:hover {
+      border-color: var(--accent-light);
+      transform: translateY(-4px);
+    }
+
+    .edu-year {
+      font-family: var(--mono); font-size: 0.65rem;
+      letter-spacing: 0.1em; color: var(--accent);
+    }
+
+    .edu-degree {
+      font-family: var(--heading); font-size: 1rem; font-weight: 600;
+      color: var(--text-1); line-height: 1.3;
+    }
+
+    .edu-school {
+      font-family: var(--mono); font-size: 0.67rem;
+      color: var(--text-3); line-height: 1.45;
+    }
+
+    .edu-divider { height: 1px; background: var(--border); margin: 0.2rem 0; }
+
+    .edu-desc { font-size: 0.8rem; color: var(--text-2); line-height: 1.7; }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 2rem;
+      display: flex; align-items: center;
+      justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+      max-width: 1140px; margin: 0 auto;
+    }
+
+    .footer-name {
+      font-family: var(--mono); font-size: 1rem;
+      color: var(--text-2);
+    }
+
+    .footer-copy {
+      font-family: var(--mono); font-size: 0.65rem;
+      color: var(--text-3); letter-spacing: 0.06em;
+    }
+
+    /* ── IMAGE UPLOAD ZONE IN MODAL ── */
+    .img-drop-zone {
+      border: 1.5px dashed var(--border-strong);
+      border-radius: 12px;
+      padding: 1.25rem;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 0.5rem;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      background: var(--bg2);
+      min-height: 90px;
+      position: relative;
+    }
+
+    .img-drop-zone:hover { border-color: var(--accent); background: var(--accent-dim); }
+
+    .img-drop-zone.has-preview { padding: 0; overflow: hidden; }
+
+    .img-drop-zone.has-preview img {
+      width: 100%; height: 120px;
+      object-fit: cover; border-radius: 10px;
+      display: block;
+    }
+
+    .img-drop-zone .drop-label {
+      font-family: var(--mono); font-size: 0.65rem;
+      letter-spacing: 0.08em; color: var(--text-3);
+      text-align: center; pointer-events: none;
+    }
+
+    .img-drop-zone .drop-icon {
+      font-size: 1.4rem; pointer-events: none;
+    }
+
+    .img-clear-btn {
+      position: absolute; top: 6px; right: 8px;
+      background: rgba(0,0,0,0.55); color: #fff;
+      border: none; border-radius: 50%;
+      width: 22px; height: 22px; font-size: 0.7rem;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      z-index: 2;
+    }
+
+    .reveal {
+      opacity: 0; transform: translateY(24px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* MODAL INPUT SHARED STYLE */
+    .modal-input {
+      font-family: var(--mono); font-size: 0.82rem;
+      padding: 0.65rem 0.9rem; border-radius: 10px;
+      border: 1px solid var(--border-strong);
+      background: var(--bg2); color: var(--text-1);
+      outline: none; width: 100%;
+      transition: border-color 0.2s;
+    }
+    .modal-input:focus { border-color: var(--accent); }
+    .modal-label {
+      font-family: var(--mono); font-size: 0.65rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--text-3);
+    }
+    .modal-field { display: flex; flex-direction: column; gap: 0.5rem; }
+
+    @media (max-width: 900px) {
+      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .edu-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 700px) {
+      .nav-center, .nav-contact { display: none; }
+      .hamburger { display: flex; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .edu-grid { grid-template-columns: 1fr; }
+      .exp-item { grid-template-columns: 1fr; gap: 0.6rem; padding: 1.75rem 0; }
+      .page-section { padding: 4rem 0; }
+      footer { flex-direction: column; text-align: center; }
+      nav { padding: 0 1.25rem; }
+      .container { padding: 0 1.25rem; }
+      .hero-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .hero-avatar { width: 220px; height: 290px; margin: 0 auto; }
+    }
+</style>
+
+  <nav>
+    <span class="nav-logo" aria-label="Chukwunonso Onovo">
+      <!-- Rounded ghost / shield monogram icon -->
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <path d="M50 8 C28 8 18 22 18 38 L18 62 C18 76 30 88 50 92 C70 88 82 76 82 62 L82 38 C82 22 72 8 50 8 Z"/>
+      </svg>
+    </span>
+    <ul class="nav-center">
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#education">Education</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="theme-toggle" id="themeBtn" aria-label="Toggle dark mode"></button>
+      <a href="mailto:chukwunonso.o009@gmail.com" class="nav-contact">Contact</a>
+      <a href="your-cv.pdf" download class="nav-contact">CV ↓</a>
+      <button class="hamburger" id="hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#about" onclick="closeMobile()">About</a>
+    <a href="#projects" onclick="closeMobile()">Projects</a>
+    <a href="#experience" onclick="closeMobile()">Experience</a>
+    <a href="#education" onclick="closeMobile()">Education</a>
+    <a href="mailto:chukwunonso.o009@gmail.com" onclick="closeMobile()">Contact ↗</a>
+    
+  </div>
+
+  <section class="hero-section">
+    <div class="hero-inner">
+      <div class="hero-left">
+        <div class="hero-avatar" id="heroAvatar">
+          C
+          <img id="heroImg" src="" alt="Chukwunonso Onovo" style="display:none;" />
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="hero-badge">Lagos, Nigeria · Open to opportunities</div>
+        <h1 class="hero-name">Chukwunonso<br/><span class="accent">Onovo</span></h1>
+        <p class="hero-subtitle">
+          Data Scientist &amp; Engineer · Founder of Westeros Multiservice<br/>Researcher in Food Security &amp; Agricultural Technology
+        </p>
+        <div class="hero-socials">
+          <a href="https://linkedin.com/in/chukwunonso" class="social-pill">LinkedIn</a>
+          <a href="https://github.com/chukwunouso" class="social-pill">GitHub</a>
+          <a href="#https://twitter.com/NousKnight" class="social-pill">Twitter / X</a>
+          <a href="https://medium.com/@chukwunonso.o009" class="social-pill">Medium</a>
+          <a href="mailto:chukwunonso.o009@gmail.com" class="social-pill">Email ↗</a>
+        </div>
+        <label class="upload-photo-btn" for="photoUpload" title="Upload your photo" style="font-family:var(--mono);font-size:0.65rem;letter-spacing:0.06em;color:var(--text-3);cursor:pointer;align-self:flex-start;">
+          ＋ Upload photo
+          <input type="file" id="photoUpload" accept="image/*" style="display:none;" />
+        </label>
+      </div>
+    </div>
+    <div class="hero-scroll" aria-hidden="true">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <section class="page-section" id="about">
+    <div class="container">
+      <div class="section-eyebrow">About</div>
+      <h2 class="section-title reveal">Building at the intersection<br/>of <span class="accent">data</span> &amp; engineering</h2>
+      <div class="about-grid">
+        <div style="display:flex;flex-direction:column;gap:1.25rem;">
+          <p class="about-text reveal">
+            Chukwunonso is a skilled engineer and founder of Westeros Multiservice — a tech company combining automation and technology for business needs. Proficient in Data Science, machine learning, and cloud technology.
+          </p>
+          <p class="about-text reveal" style="transition-delay:0.1s">
+            Currently building towards becoming a leading solutions expert in business analytics while working on Food Security in Agriculture as a lead researcher and consultant. Writer, web developer, and mechatronics engineer. ALX Professional Foundation certificate holder.
+          </p>
+        </div>
+        <div class="about-right">
+          <div class="location-card reveal">
+            <span style="font-size:1.2rem;"></span>
+            <div>
+              <div class="location-text">Lagos, Nigeria</div>
+              <div class="location-sub">West Africa Time (WAT) · UTC+1</div>
+            </div>
+          </div>
+          <div class="skills-card reveal" style="transition-delay:0.1s">
+            <div class="skills-label">Core Skills</div>
+            <div class="skill-tags">
+              <span class="skill-tag">Python</span>
+              <span class="skill-tag">SQL</span>
+              <span class="skill-tag">R</span>
+              <span class="skill-tag">Jupyter</span>
+              <span class="skill-tag">Tableau</span>
+              <span class="skill-tag">Power BI</span>
+              <span class="skill-tag">AWS</span>
+              <span class="skill-tag">IoT</span>
+              <span class="skill-tag">PLC</span>
+              <span class="skill-tag">Automation</span>
+              <span class="skill-tag">WordPress</span>
+              <span class="skill-tag">Machine Learning</span>
+              <span class="skill-tag">Data Analysis</span>
+              <span class="skill-tag">Project Mgmt</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <section class="page-section" id="projects">
+    <div class="container">
+      <div class="section-eyebrow">Projects</div>
+      <h2 class="section-title reveal">Selected <span class="accent">work</span></h2>
+      <div class="projects-grid" id="projectsGrid">
+
+        <!-- HARDCODED CARD 1 -->
+        <div class="project-card reveal" data-static="true">
+          <div class="project-thumb">
+            <div class="project-thumb-grid"></div>
+            <img src="/images/data-thumbnail.png" style=" width: 100%; height: 100%; object-fit: fill;" alt="Data Thumbnail">
+          </div>
+          <div class="project-body">
+            <div class="project-header">
+              <div class="project-title">Team A360 Slide Deck</div>
+              <div class="project-actions">
+                <a href="#" class="project-link-btn" aria-label="View project">↗</a>
+                <button class="project-delete-btn" onclick="deleteStaticProject(this)" title="Remove project" aria-label="Delete project">✕</button>
+              </div>
+            </div>
+            <div class="project-tags">
+              <span class="project-tag">Data Analysis</span>
+              <span class="project-tag">Visualization</span>
+              <span class="project-tag">Data Cleaning</span>
+              <span class="project-tag">Transformation</span>
+            </div>
+            <p class="project-desc">Collaborated with team to produce slides on Agriculture as a Global Opportunity. Enhancing Agricultural Productivity Through Technology in Nigeria. Presented using Google Slides.</p>
+          </div>
+        </div>
+
+        <!-- HARDCODED CARD 2 -->
+        <div class="project-card reveal" style="transition-delay:0.1s" data-static="true">
+          <div class="project-thumb">
+            <div class="project-thumb-grid"></div>
+            <img src="/images/westeserve-thumbnail.png" style=" width: 100%; height: 100%; object-fit: fill;" alt="Westeserve Thumbnail">
+          </div>
+          <div class="project-body">
+            <div class="project-header">
+              <div class="project-title"></div>
+              <div class="project-actions">
+                <a href="https://westeserve.com/" class="project-link-btn" aria-label="View project">↗</a>
+                <button class="project-delete-btn" onclick="deleteStaticProject(this)" title="Remove project" aria-label="Delete project">✕</button>
+              </div>
+            </div>
+            <div class="project-tags">
+              <span class="project-tag">Graphic Design</span>
+              <span class="project-tag">WordPress</span>
+              <span class="project-tag">CMS</span>
+              <span class="project-tag">Database Mgmt</span>
+            </div>
+            <p class="project-desc">Designed a responsive website for Westeserve, a growing e-commerce brand for home and office electrical devices. Built on WordPress with external hosting.</p>
+          </div>
+        </div>
+
+        <!-- ADD CARD -->
+        <div class="project-card add-card reveal" style="transition-delay:0.15s" id="addProjectCard"
+             onclick="openProjectModal()" role="button" tabindex="0" aria-label="Add new project">
+          <div class="add-inner">
+            <div class="add-circle">+</div>
+            <span class="add-label">Add Project</span>
+          </div>
+        </div>
+        <div class="project-card add-card reveal" style="transition-delay:0.15s" id="addProjectCard"
+             onclick="openProjectModal()" role="button" tabindex="0" aria-label="Add new project">
+          <div class="add-inner">
+            <div class="add-circle">+</div>
+            <span class="add-label">Add Project</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <section class="page-section" id="experience">
+    <div class="container">
+      <div class="section-eyebrow">Experience</div>
+      <h2 class="section-title reveal">Career <span class="accent">timeline</span></h2>
+      <div class="exp-list">
+
+        <div class="exp-item reveal">
+          <div class="exp-left">
+            <div class="exp-date">2020 – 2023</div>
+            <div class="exp-company">Garment Care Limited</div>
+          </div>
+          <div>
+            <div class="exp-role">Assistant Engineering Manager</div>
+            <p class="exp-desc">Reduced turnaround time for breakdowns by 40% by implementing root cause identification strategies and enhancing daily record-keeping practices. Implemented robust electrical protection and safety frameworks — reducing costly equipment failure by 80%.</p>
+            <div class="exp-tags">
+              <span class="exp-tag">Electrical Safety</span>
+              <span class="exp-tag">Project Management</span>
+              <span class="exp-tag">Leadership</span>
+              <span class="exp-tag">Excel</span>
+              <span class="exp-tag">Electric Motors</span>
+              <span class="exp-tag">PLC</span>
+              <span class="exp-tag">Load Balancing</span>
+              <span class="exp-tag">Wiring Schemes</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="exp-item reveal" style="transition-delay:0.08s">
+          <div class="exp-left">
+            <div class="exp-date">2023 – Present</div>
+            <div class="exp-company">Westeserve</div>
+          </div>
+          <div>
+            <div class="exp-role">Technical Officer</div>
+            <p class="exp-desc">Led the design of the Westeserve landing page — including the e-commerce store, backend backup, and migration of the entire site to a new hosting provider. Led cross-functional teams and delegated installation tasks across multiple locations.</p>
+            <div class="exp-tags">
+              <span class="exp-tag">Project Management</span>
+              <span class="exp-tag">Data Science</span>
+              <span class="exp-tag">Python</span>
+              <span class="exp-tag">SQL</span>
+              <span class="exp-tag">AWS / Jupyter</span>
+              <span class="exp-tag">IoT</span>
+              <span class="exp-tag">Automation</span>
+              <span class="exp-tag">Solar / Inverter</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="exp-item reveal" style="transition-delay:0.16s">
+          <div class="exp-left">
+            <div class="exp-date">2024 – Present</div>
+            <div class="exp-company">Chivita Hollandia</div>
+          </div>
+          <div>
+            <div class="exp-role">Shift Maintenance Engineer</div>
+            <p class="exp-desc">Designed and produced planned maintenance schedules and process documentation — reducing overall production cost by 30%. Led teams in the successful installation and commissioning of various food processing and packaging machines.</p>
+            <div class="exp-tags">
+              <span class="exp-tag">Engineering H&amp;S</span>
+              <span class="exp-tag">ASCI Devices</span>
+              <span class="exp-tag">Servo Motors &amp; Drives</span>
+              <span class="exp-tag">Pneumatic Control</span>
+              <span class="exp-tag">Steam Generation</span>
+              <span class="exp-tag">Pumps &amp; Valves</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <section class="page-section" id="education">
+    <div class="container">
+      <div class="section-eyebrow">Education</div>
+      <h2 class="section-title reveal">Academic <span class="accent">foundations</span></h2>
+      <div class="edu-grid">
+
+        <div class="edu-card reveal">
+          <div class="edu-year">2008 – 2013</div>
+          <div class="edu-degree">B.Eng Chemical Engineering</div>
+          <div class="edu-school">Enugu State University of Science and Technology</div>
+          <div class="edu-divider"></div>
+          <p class="edu-desc">Process Flow, Thermodynamics, Fluid Mechanics, Quantum Theory, Engineering Mathematics.</p>
+        </div>
+
+        <div class="edu-card reveal" style="transition-delay:0.1s">
+          <div class="edu-year">2016</div>
+          <div class="edu-degree">Mechatronics</div>
+          <div class="edu-school">Institute for Industrial Technology</div>
+          <div class="edu-divider"></div>
+          <p class="edu-desc">PLC, VSD, Machine Tools, Electromechanical, Metal Works and Fabrication.</p>
+        </div>
+
+        <div class="edu-card reveal" style="transition-delay:0.2s">
+          <div class="edu-year">2025 – 2026</div>
+          <div class="edu-degree">Data Science</div>
+          <div class="edu-school">ALX · Professional Foundation</div>
+          <div class="edu-divider"></div>
+          <p class="edu-desc">Python, R, Tableau, SQL, Jupyter Notebook, Power BI, Machine Learning.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider" style="margin-top:0;"></div>
+
+  <footer>
+    <span class="footer-name">Chukwunonso Onovo</span>
+    <span class="footer-copy">© 2026 · Data Scientist · Engineer · Lagos, NG</span>
+  </footer>
+
+  <!-- ══════════════════════════════════════════
+       ADD PROJECT MODAL
+  ══════════════════════════════════════════ -->
+  <div id="projectModal" style="display:none; position:fixed; inset:0; z-index:500; background:rgba(0,0,0,0.5); backdrop-filter:blur(6px); align-items:center; justify-content:center; padding:1.5rem;">
+    <div style="background:var(--surface); border:1px solid var(--border-strong); border-radius:20px; padding:2rem; width:100%; max-width:520px; display:flex; flex-direction:column; gap:1.25rem; max-height:90vh; overflow-y:auto;">
+
+      <div style="display:flex; align-items:center; justify-content:space-between;">
+        <span style="font-family:var(--heading); font-size:1.15rem; font-weight:700; color:var(--text-1);">Add Project</span>
+        <button onclick="closeProjectModal()" style="background:none; border:none; cursor:pointer; font-size:1.25rem; color:var(--text-3); line-height:1;">✕</button>
+      </div>
+
+      <!-- Image upload -->
+      <div class="modal-field">
+        <label class="modal-label">Project Image (optional)</label>
+        <div class="img-drop-zone" id="imgDropZone" onclick="document.getElementById('pImage').click()">
+          <span class="drop-icon">+</span>
+          <span class="drop-label">Click to upload a cover image</span>
+          <input type="file" id="pImage" accept="image/*" style="display:none;" />
+        </div>
+      </div>
+
+      <div class="modal-field">
+        <label class="modal-label">Project Title *</label>
+        <input id="pTitle" type="text" class="modal-input" placeholder="e.g. Sales Dashboard" />
+      </div>
+
+      <div class="modal-field">
+        <label class="modal-label">Category / Thumb Label</label>
+        <input id="pCategory" type="text" class="modal-input" placeholder="e.g. Machine Learning" />
+      </div>
+
+      <div class="modal-field">
+        <label class="modal-label">Description *</label>
+        <textarea id="pDesc" rows="3" class="modal-input" placeholder="Briefly describe the project..." style="resize:vertical;"></textarea>
+      </div>
+
+      <div class="modal-field">
+        <label class="modal-label">Tags (comma-separated)</label>
+        <input id="pTags" type="text" class="modal-input" placeholder="Python, Data Analysis, Visualization" />
+      </div>
+
+      <div class="modal-field">
+        <label class="modal-label">Project Link (optional)</label>
+        <input id="pLink" type="url" class="modal-input" placeholder="https://..." />
+      </div>
+
+      <div id="pError" style="font-family:var(--mono); font-size:0.7rem; color:#e05; display:none;"></div>
+
+      <div style="display:flex; gap:0.75rem; justify-content:flex-end; margin-top:0.25rem;">
+        <button onclick="closeProjectModal()" style="font-family:var(--mono); font-size:0.72rem; padding:0.6rem 1.2rem; border-radius:100px; border:1px solid var(--border-strong); background:transparent; color:var(--text-2); cursor:pointer;">Cancel</button>
+        <button onclick="saveProject()" style="font-family:var(--mono); font-size:0.72rem; padding:0.6rem 1.4rem; border-radius:100px; border:none; background:var(--accent); color:#fff; cursor:pointer; font-weight:500;">Save Project</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       CONFIRM DELETE MODAL
+  ══════════════════════════════════════════ -->
+  <div id="confirmModal" style="display:none; position:fixed; inset:0; z-index:600; background:rgba(0,0,0,0.45); backdrop-filter:blur(4px); align-items:center; justify-content:center; padding:1.5rem;">
+    <div style="background:var(--surface); border:1px solid var(--border-strong); border-radius:16px; padding:1.75rem 2rem; max-width:380px; width:100%; display:flex; flex-direction:column; gap:1rem;">
+      <span style="font-family:var(--heading); font-size:1.05rem; font-weight:700; color:var(--text-1);">Remove project?</span>
+      <p style="font-family:var(--mono); font-size:0.75rem; color:var(--text-2); line-height:1.7;">This will remove the card from your portfolio. This action cannot be undone.</p>
+      <div style="display:flex; gap:0.75rem; justify-content:flex-end;">
+        <button onclick="closeConfirm()" style="font-family:var(--mono); font-size:0.72rem; padding:0.55rem 1.1rem; border-radius:100px; border:1px solid var(--border-strong); background:transparent; color:var(--text-2); cursor:pointer;">Cancel</button>
+        <button id="confirmDeleteBtn" style="font-family:var(--mono); font-size:0.72rem; padding:0.55rem 1.2rem; border-radius:100px; border:none; background:#cc0044; color:#fff; cursor:pointer;">Remove</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* ── THEME ── */
+    const themeBtn = document.getElementById('themeBtn');
+    const html = document.documentElement;
+    html.setAttribute('data-theme', localStorage.getItem('theme') || 'light');
+    themeBtn.addEventListener('click', () => {
+      const next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+    });
+
+    /* ── NAV ── */
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+    function closeMobile() { mobileMenu.classList.remove('open'); }
+
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 76, behavior: 'smooth' });
+        }
+      });
+    });
+
+    /* ── SCROLL REVEAL ── */
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    /* ── HERO PHOTO UPLOAD ── */
+    document.getElementById('photoUpload').addEventListener('change', function () {
+      const file = this.files[0]; if (!file) return;
+      const reader = new FileReader();
+      reader.onload = e => {
+        const img = document.getElementById('heroImg');
+        document.getElementById('heroAvatar').childNodes[0].textContent = '';
+        img.src = e.target.result; img.style.display = 'block';
+        localStorage.setItem('heroPhoto', e.target.result);
+      };
+      reader.readAsDataURL(file);
+    });
+    const storedPhoto = localStorage.getItem('heroPhoto');
+    if (storedPhoto) {
+      const img = document.getElementById('heroImg');
+      document.getElementById('heroAvatar').childNodes[0].textContent = '';
+      img.src = storedPhoto; img.style.display = 'block';
+    }
+
+    /* ══════════════════════════════════════
+       IMAGE UPLOAD IN MODAL
+    ══════════════════════════════════════ */
+    let pendingImageData = null; // base64 of chosen project image
+
+    document.getElementById('pImage').addEventListener('change', function () {
+      const file = this.files[0]; if (!file) return;
+      const reader = new FileReader();
+      reader.onload = e => {
+        pendingImageData = e.target.result;
+        const zone = document.getElementById('imgDropZone');
+        zone.classList.add('has-preview');
+        zone.innerHTML = `
+          <img src="${pendingImageData}" alt="Preview" />
+          <button class="img-clear-btn" onclick="clearImagePreview(event)" title="Remove image">✕</button>`;
+      };
+      reader.readAsDataURL(file);
+    });
+
+    function clearImagePreview(e) {
+      e.stopPropagation();
+      pendingImageData = null;
+      const zone = document.getElementById('imgDropZone');
+      zone.classList.remove('has-preview');
+      zone.innerHTML = `
+        <span class="drop-icon">🖼️</span>
+        <span class="drop-label">Click to upload a cover image</span>
+        <input type="file" id="pImage" accept="image/*" style="display:none;" />`;
+      document.getElementById('pImage').addEventListener('change', arguments.callee.constructor.prototype); // re-bind
+      // Re-bind the file input since we replaced the DOM
+      bindImageInput();
+    }
+
+    function bindImageInput() {
+      const inp = document.getElementById('pImage');
+      if (inp) {
+        inp.addEventListener('change', function () {
+          const file = this.files[0]; if (!file) return;
+          const reader = new FileReader();
+          reader.onload = e => {
+            pendingImageData = e.target.result;
+            const zone = document.getElementById('imgDropZone');
+            zone.classList.add('has-preview');
+            zone.innerHTML = `
+              <img src="${pendingImageData}" alt="Preview" />
+              <button class="img-clear-btn" onclick="clearImagePreview(event)" title="Remove image">✕</button>`;
+          };
+          reader.readAsDataURL(file);
+        });
+      }
+    }
+
+    /* ══════════════════════════════════════
+       PROJECT MODAL
+    ══════════════════════════════════════ */
+    function openProjectModal() {
+      document.getElementById('projectModal').style.display = 'flex';
+      document.getElementById('pTitle').focus();
+    }
+
+    function closeProjectModal() {
+      document.getElementById('projectModal').style.display = 'none';
+      ['pTitle','pCategory','pDesc','pTags','pLink'].forEach(id => document.getElementById(id).value = '');
+      document.getElementById('pError').style.display = 'none';
+      // Reset image zone
+      pendingImageData = null;
+      const zone = document.getElementById('imgDropZone');
+      zone.classList.remove('has-preview');
+      zone.innerHTML = `
+        <span class="drop-icon">🖼️</span>
+        <span class="drop-label">Click to upload a cover image</span>
+        <input type="file" id="pImage" accept="image/*" style="display:none;" />`;
+      bindImageInput();
+    }
+
+    document.getElementById('projectModal').addEventListener('click', function(e) {
+      if (e.target === this) closeProjectModal();
+    });
+
+    document.getElementById('addProjectCard').addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') openProjectModal();
+    });
+
+    function saveProject() {
+      const title    = document.getElementById('pTitle').value.trim();
+      const desc     = document.getElementById('pDesc').value.trim();
+      const category = document.getElementById('pCategory').value.trim() || 'Project';
+      const tagsRaw  = document.getElementById('pTags').value.trim();
+      const link     = document.getElementById('pLink').value.trim();
+      const errEl    = document.getElementById('pError');
+
+      if (!title || !desc) {
+        errEl.textContent = 'Please fill in the title and description.';
+        errEl.style.display = 'block';
+        return;
+      }
+      errEl.style.display = 'none';
+
+      const projects = JSON.parse(localStorage.getItem('customProjects') || '[]');
+      const project  = { id: Date.now(), title, desc, category, tags: tagsRaw, link, image: pendingImageData };
+      projects.push(project);
+      localStorage.setItem('customProjects', JSON.stringify(projects));
+
+      renderProject(project);
+      closeProjectModal();
+    }
+
+    /* ── RENDER a dynamic project card ── */
+    function renderProject(project) {
+      const grid    = document.querySelector('.projects-grid');
+      const addCard = document.getElementById('addProjectCard');
+      const count   = grid.querySelectorAll('.project-card:not(.add-card)').length + 1;
+      const tags    = project.tags
+        ? project.tags.split(',').map(t => `<span class="project-tag">${t.trim()}</span>`).join('')
+        : '';
+      const linkBtn = project.link
+        ? `<a href="${project.link}" target="_blank" rel="noopener" class="project-link-btn" aria-label="View project">↗</a>`
+        : `<span class="project-link-btn" style="opacity:0.25;cursor:default;">↗</span>`;
+
+      // thumb: real image or grid pattern
+      const thumbContent = project.image
+        ? `<div class="project-thumb has-image" style="background-image:url('${project.image}')">
+             <span class="project-num" style="color:#fff;text-shadow:0 1px 4px rgba(0,0,0,0.5);">0${count}</span>
+           </div>`
+        : `<div class="project-thumb">
+             <div class="project-thumb-grid"></div>
+             <span class="project-thumb-label">${project.category}</span>
+             <span class="project-num">0${count}</span>
+           </div>`;
+
+      const card = document.createElement('div');
+      card.className = 'project-card';
+      card.dataset.id = project.id;
+      card.innerHTML = `
+        ${thumbContent}
+        <div class="project-body">
+          <div class="project-header">
+            <div class="project-title">${project.title}</div>
+            <div class="project-actions">
+              ${linkBtn}
+              <button class="project-delete-btn" onclick="confirmDelete(${project.id}, null, this)" title="Remove project" aria-label="Delete project">✕</button>
+            </div>
+          </div>
+          ${tags ? `<div class="project-tags">${tags}</div>` : ''}
+          <p class="project-desc">${project.desc}</p>
+        </div>`;
+      grid.insertBefore(card, addCard);
+    }
+
+    /* ══════════════════════════════════════
+       CONFIRM-DELETE MODAL
+    ══════════════════════════════════════ */
+    let _deleteCallback = null;
+
+    function confirmDelete(id, cardEl, btn) {
+      // resolve the card element
+      const card = cardEl || btn.closest('.project-card');
+      document.getElementById('confirmModal').style.display = 'flex';
+      _deleteCallback = () => {
+        if (id !== null) {
+          // dynamic project — remove from localStorage
+          const projects = JSON.parse(localStorage.getItem('customProjects') || '[]');
+          localStorage.setItem('customProjects', JSON.stringify(projects.filter(p => p.id !== id)));
+        }
+        card.style.transition = 'opacity 0.25s, transform 0.25s';
+        card.style.opacity = '0';
+        card.style.transform = 'scale(0.95)';
+        setTimeout(() => card.remove(), 260);
+        closeConfirm();
+      };
+      document.getElementById('confirmDeleteBtn').onclick = _deleteCallback;
+    }
+
+    function closeConfirm() {
+      document.getElementById('confirmModal').style.display = 'none';
+      _deleteCallback = null;
+    }
+
+    document.getElementById('confirmModal').addEventListener('click', function(e) {
+      if (e.target === this) closeConfirm();
+    });
+
+    /* ── Delete a hardcoded (static) card ── */
+    function deleteStaticProject(btn) {
+      const card = btn.closest('.project-card');
+      confirmDelete(null, card, btn);
+    }
+
+    /* ── Load saved dynamic projects on boot ── */
+    JSON.parse(localStorage.getItem('customProjects') || '[]').forEach(p => renderProject(p));
+
+    /* ── initial bind for file input ── */
+    bindImageInput();
+  </script>
+</body>
+</html>

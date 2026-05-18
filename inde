@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chukwunonso Onovo — Data Scientist & Engineer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600;700;800&family=IBM+Plex+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="stylesheet" href="site.css" />
+  <style>
+    
+    :root {
+      --bg: #F5F3EE;
+      --bg2: #EDEAE3;
+      --surface: #FFFFFF;
+      --surface2: #F9F7F4;
+      --border: rgba(0,0,0,0.08);
+      --border-strong: rgba(0,0,0,0.14);
+      --text-1: #1A1814;
+      --text-2: #4A4640;
+      --text-3: #8A8480;
+      --accent: #4A80D4;
+      --accent-light: rgba(74,128,212,0.22);
+      --accent-dim: rgba(74,128,212,0.08);
+      --tag-bg: #EDE9E3;
+      --tag-text: #4A4640;
+      --nav-bg: rgba(245,243,238,0.88);
+      --serif: 'IBM Plex Mono', monospace;
+      --mono: 'IBM Plex Mono', monospace;
+      --sans: 'IBM Plex Mono', monospace;
+      --heading: 'Inter Tight', sans-serif;
+      --radius: 16px;
+      --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    [data-theme="dark"] {
+      --bg: #131210;
+      --bg2: #1C1A17;
+      --surface: #211F1B;
+      --surface2: #2A2722;
+      --border: rgba(255,255,255,0.07);
+      --border-strong: rgba(255,255,255,0.13);
+      --text-1: #F0EDE6;
+      --text-2: #B8B0A4;
+      --text-3: #6B6560;
+      --accent: #6B9FE4;
+      --accent-light: rgba(107,159,228,0.22);
+      --accent-dim: rgba(107,159,228,0.08);
+      --tag-bg: rgba(255,255,255,0.07);
+      --tag-text: #B8B0A4;
+      --nav-bg: rgba(19,18,16,0.9);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text-1);
+      line-height: 1.6;
+      min-height: 100vh;
+      transition: background var(--transition), color var(--transition);
+    }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      background: var(--nav-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      transition: background var(--transition);
+    }
+
+    .nav-logo {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .nav-center {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-center a {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      color: var(--text-3);
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-center a:hover { color: var(--accent); }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .theme-toggle {
+      width: 40px; height: 22px;
+      background: var(--surface2);
+      border: 1px solid var(--border-strong);
+      border-radius: 100px;
+      cursor: pointer;
+      position: relative;
+      transition: background var(--transition);
+      flex-shrink: 0;
+    }
+
+    .theme-toggle::after {
+      content: '';
+      position: absolute;
+      top: 3px; left: 3px;
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      background: var(--accent);
+      transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    [data-theme="dark"] .theme-toggle::after {
+      transform: translateX(18px);
+    }
+
+    .nav-contact {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.06em;
+      color: var(--accent);
+      text-decoration: none;
+      border: 1px solid var(--accent);
+      padding: 0.3rem 0.85rem;
+      border-radius: 100px;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .nav-contact:hover {
+      background: var(--accent);
+      color: white;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+      background: none;
+      border: none;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 22px; height: 1.5px;
+      background: var(--text-2);
+      transition: 0.3s;
+    }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 60px; left: 0; right: 0;
+      background: var(--nav-bg);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 1.5rem 2rem;
+      flex-direction: column;
+      gap: 1.25rem;
+      z-index: 199;
+    }
+
+    .mobile-menu.open { display: flex; }
+
+    .mobile-menu a {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-2);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .mobile-menu a:hover { color: var(--accent); }
+
+    /* HERO */
+    .hero-section {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 80px 2rem 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg-text {
+      position: absolute;
+      font-family: var(--mono);
+      font-size: clamp(80px, 16vw, 220px);
+      font-weight: 700;
+      color: var(--border);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      white-space: nowrap;
+      pointer-events: none;
+      user-select: none;
+      letter-spacing: -0.04em;
+      z-index: 0;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 1.5rem;
+      max-width: 800px;
+    }
+
+    .hero-badge {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--accent-dim);
+      border: 1px solid var(--accent-light);
+      padding: 0.35rem 1rem;
+      border-radius: 100px;
+    }
+
+    .hero-avatar {
+      width: 100px; height: 100px;
+      border-radius: 50%;
+      background: var(--accent-dim);
+      border: 3px solid var(--accent-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--mono);
+      font-size: 2.5rem;
+      color: var(--accent);
+      
+    }
+
+    .hero-name {
+      font-family: var(--heading);
+      font-size: clamp(2rem, 5vw, 4rem);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      color: var(--text-1);
+    }
+
+    .hero-name .accent { color: var(--accent); }
+
+    .hero-subtitle {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      color: var(--text-3);
+      letter-spacing: 0.04em;
+      max-width: 480px;
+      line-height: 1.85;
+    }
+
+    .hero-socials {
+      display: flex;
+      gap: 0.55rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .social-pill {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-2);
+      text-decoration: none;
+      border: 1px solid var(--border-strong);
+      padding: 0.4rem 0.9rem;
+      border-radius: 100px;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+      background: var(--surface);
+    }
+
+    .social-pill:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-dim);
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      color: var(--text-3);
+      text-transform: uppercase;
+    }
+
+    .scroll-line {
+      width: 1px; height: 40px;
+      background: linear-gradient(to bottom, var(--accent), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.4; transform: scaleY(1); }
+      50% { opacity: 1; transform: scaleY(1.15); }
+    }
+
+    .container {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .page-section { padding: 6rem 0; }
+
+    .section-eyebrow {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: var(--heading);
+      font-size: clamp(1.6rem, 3.5vw, 2.6rem);
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.03em;
+      color: var(--text-1);
+      margin-bottom: 3rem;
+    }
+
+    .section-title .accent { color: var(--accent); }
+
+    .section-divider {
+      height: 1px;
+      background: var(--border);
+      max-width: 1140px;
+      margin: 0 auto;
+    }
+
+    /* ABOUT */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .about-text {
+      font-size: 1.05rem;
+      color: var(--text-2);
+      line-height: 1.85;
+    }
+
+    .about-right { display: flex; flex-direction: column; gap: 1.25rem; }
+
+    .location-card {
+      background: var(--accent-dim);
+      border: 1px solid var(--accent-light);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .location-text {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--accent);
+      letter-spacing: 0.04em;
+    }
+
+    .location-sub {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      color: var(--accent);
+      opacity: 0.65;
+      margin-top: 2px;
+    }
+
+    .skills-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+    }
+
+    .skills-label {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-bottom: 1rem;
+    }
+
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+
+    .skill-tag {
+      font-family: var(--mono);
+      font-size: 0.67rem;
+      padding: 0.35rem 0.8rem;
+      border-radius: 100px;
+      background: var(--tag-bg);
+      color: var(--tag-text);
+      transition: background 0.2s, color 0.2s;
+      cursor: default;
+    }
+
+    .skill-tag:hover {
+      background: var(--accent-dim);
+      color: var(--accent);
+    }
+
+    /* PROJECTS */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: transform 0.3s ease, border-color 0.3s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .project-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent-light);
+    }
+
+    .project-thumb {
+      width: 100%; aspect-ratio: 16/9;
+      background: var(--bg2);
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+
+    .project-thumb-grid {
+      position: absolute; inset: 0;
+      background-image:
+        repeating-linear-gradient(0deg, var(--border) 0, var(--border) 1px, transparent 1px, transparent 36px),
+        repeating-linear-gradient(90deg, var(--border) 0, var(--border) 1px, transparent 1px, transparent 36px);
+    }
+
+    .project-thumb-label {
+      font-family: var(--mono);
+      
+      font-size: 0.875rem;
+      color: var(--text-3);
+      z-index: 1;
+      text-align: center;
+      padding: 0 1rem;
+    }
+
+    .project-num {
+      position: absolute; bottom: 1rem; right: 1rem;
+      font-family: var(--mono);
+      font-size: 0.58rem; letter-spacing: 0.1em;
+      color: var(--text-3); z-index: 1;
+    }
+
+    .project-body {
+      padding: 1.5rem;
+      display: flex; flex-direction: column;
+      gap: 0.85rem; flex: 1;
+    }
+
+    .project-header {
+      display: flex; align-items: flex-start;
+      justify-content: space-between; gap: 1rem;
+    }
+
+    .project-title {
+      font-family: var(--heading);
+      font-size: 1rem; font-weight: 600;
+      line-height: 1.3;
+      color: var(--text-1);
+    }
+
+    .project-link-btn {
+      width: 32px; height: 32px;
+      border: 1px solid var(--border-strong);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      text-decoration: none; color: var(--text-3);
+      font-size: 0.8rem; flex-shrink: 0;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+
+    .project-link-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-dim);
+    }
+
+    .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
+    .project-tag {
+      font-family: var(--mono);
+      font-size: 0.6rem; padding: 0.25rem 0.6rem;
+      border-radius: 100px;
+      background: var(--tag-bg); color: var(--tag-text);
+    }
+
+    .project-desc {
+      font-size: 0.84rem; color: var(--text-2); line-height: 1.75;
+    }
+
+    .project-card.add-card {
+      border-style: dashed; background: transparent;
+    }
+
+    .add-inner {
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      min-height: 240px; gap: 0.75rem;
+    }
+
+    .add-circle {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      border: 1.5px dashed var(--border-strong);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.25rem; color: var(--text-3);
+    }
+
+    .add-label {
+      font-family: var(--mono); font-size: 0.65rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--text-3);
+    }
+
+    /* EXPERIENCE */
+    .exp-list { display: flex; flex-direction: column; }
+
+    .exp-item {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 2.5rem;
+      padding: 2.5rem 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .exp-item:last-child { border-bottom: 1px solid var(--border); }
+
+    .exp-left { display: flex; flex-direction: column; gap: 0.3rem; padding-top: 0.2rem; }
+
+    .exp-date {
+      font-family: var(--mono); font-size: 0.68rem;
+      color: var(--accent); letter-spacing: 0.05em;
+    }
+
+    .exp-company {
+      font-family: var(--mono); font-size: 0.65rem;
+      color: var(--text-3); line-height: 1.4;
+    }
+
+    .exp-role {
+      font-family: var(--heading); font-size: 1.25rem; font-weight: 600;
+      color: var(--text-1); margin-bottom: 0.85rem; line-height: 1.3;
+    }
+
+    .exp-desc {
+      font-size: 0.875rem; color: var(--text-2);
+      line-height: 1.8; margin-bottom: 1rem;
+    }
+
+    .exp-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
+    .exp-tag {
+      font-family: var(--mono); font-size: 0.6rem;
+      padding: 0.25rem 0.65rem; border-radius: 100px;
+      background: var(--tag-bg); color: var(--tag-text);
+    }
+
+    /* EDUCATION */
+    .edu-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+    }
+
+    .edu-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+      display: flex; flex-direction: column; gap: 0.75rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .edu-card:hover {
+      border-color: var(--accent-light);
+      transform: translateY(-4px);
+    }
+
+    .edu-year {
+      font-family: var(--mono); font-size: 0.65rem;
+      letter-spacing: 0.1em; color: var(--accent);
+    }
+
+    .edu-degree {
+      font-family: var(--heading); font-size: 1rem; font-weight: 600;
+      color: var(--text-1); line-height: 1.3;
+    }
+
+    .edu-school {
+      font-family: var(--mono); font-size: 0.67rem;
+      color: var(--text-3); line-height: 1.45;
+    }
+
+    .edu-divider { height: 1px; background: var(--border); margin: 0.2rem 0; }
+
+    .edu-desc { font-size: 0.8rem; color: var(--text-2); line-height: 1.7; }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 2rem;
+      display: flex; align-items: center;
+      justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+      max-width: 1140px; margin: 0 auto;
+    }
+
+    .footer-name {
+      font-family: var(--mono); font-size: 1rem;
+       color: var(--text-2);
+    }
+
+    .footer-copy {
+      font-family: var(--mono); font-size: 0.65rem;
+      color: var(--text-3); letter-spacing: 0.06em;
+    }
+
+    .reveal {
+      opacity: 0; transform: translateY(24px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 900px) {
+      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .edu-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 700px) {
+      .nav-center, .nav-contact { display: none; }
+      .hamburger { display: flex; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .edu-grid { grid-template-columns: 1fr; }
+      .exp-item { grid-template-columns: 1fr; gap: 0.6rem; padding: 1.75rem 0; }
+      .page-section { padding: 4rem 0; }
+      footer { flex-direction: column; text-align: center; }
+      nav { padding: 0 1.25rem; }
+      .container { padding: 0 1.25rem; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <nav>
+    <span class="nav-logo">C. Onovo</span>
+    <ul class="nav-center">
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#education">Education</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="theme-toggle" id="themeBtn" aria-label="Toggle dark mode"></button>
+      <a href="mailto:placeholder@email.com" class="nav-contact">Contact</a>
+      <button class="hamburger" id="hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#about" onclick="closeMobile()">About</a>
+    <a href="#projects" onclick="closeMobile()">Projects</a>
+    <a href="#experience" onclick="closeMobile()">Experience</a>
+    <a href="#education" onclick="closeMobile()">Education</a>
+    <a href="mailto:placeholder@email.com" onclick="closeMobile()">Contact ↗</a>
+  </div>
+
+  <section class="hero-section">
+    <div class="hero-bg-text" aria-hidden="true">Data</div>
+    <div class="hero-inner">
+      <div class="hero-badge">Lagos, Nigeria · Open to opportunities</div>
+      <div class="hero-avatar">C</div>
+      <h1 class="hero-name">Chukwunonso<br/><span class="accent">Onovo</span></h1>
+      <p class="hero-subtitle">
+        Data Scientist &amp; Engineer · Founder of Westeros Multiservice<br/>Researcher in Food Security &amp; Agricultural Technology
+      </p>
+      <div class="hero-socials">
+        <a href="#" class="social-pill">LinkedIn</a>
+        <a href="#" class="social-pill">GitHub</a>
+        <a href="#" class="social-pill">Twitter / X</a>
+        <a href="#" class="social-pill">Medium</a>
+        <a href="mailto:placeholder@email.com" class="social-pill">Email ↗</a>
+      </div>
+    </div>
+    <div class="hero-scroll" aria-hidden="true">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <section class="page-section" id="about">
+    <div class="container">
+      <div class="section-eyebrow">01 — About</div>
+      <h2 class="section-title reveal">Building at the intersection<br/>of <span class="accent">data</span> &amp; engineering</h2>
+      <div class="about-grid">
+        <div style="display:flex;flex-direction:column;gap:1.25rem;">
+          <p class="about-text reveal">
+            Chukwunonso is a skilled engineer and founder of Westeros Multiservice — a tech company combining automation and technology for business needs. Proficient in Data Science, machine learning, and cloud technology.
+          </p>
+          <p class="about-text reveal" style="transition-delay:0.1s">
+            Currently building towards becoming a leading solutions expert in business analytics while working on Food Security in Agriculture as a lead researcher and consultant. Writer, web developer, and mechatronics engineer. ALX Professional Foundation certificate holder.
+          </p>
+        </div>
+        <div class="about-right">
+          <div class="location-card reveal">
+            <span style="font-size:1.2rem;">📍</span>
+            <div>
+              <div class="location-text">Lagos, Nigeria</div>
+              <div class="location-sub">West Africa Time (WAT) · UTC+1</div>
+            </div>
+          </div>
+          <div class="skills-card reveal" style="transition-delay:0.1s">
+            <div class="skills-label">Core Skills</div>
+            <div class="skill-tags">
+              <span class="skill-tag">Python</span>
+              <span class="skill-tag">SQL</span>
+              <span class="skill-tag">R</span>
+              <span class="skill-tag">Jupyter</span>
+              <span class="skill-tag">Tableau</span>
+              <span class="skill-tag">Power BI</span>
+              <span class="skill-tag">AWS</span>
+              <span class="skill-tag">IoT</span>
+              <span class="skill-tag">PLC</span>
+              <span class="skill-tag">Automation</span>
+              <span class="skill-tag">WordPress</span>
+              <span class="skill-tag">Machine Learning</span>
+              <span class="skill-tag">Data Analysis</span>
+              <span class="skill-tag">Project Mgmt</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <section class="page-section" id="projects">
+    <div class="container">
+      <div class="section-eyebrow">02 — Projects</div>
+      <h2 class="section-title reveal">Selected <span class="accent">work</span></h2>
+      <div class="projects-grid">
+
+        <div class="project-card reveal">
+          <div class="project-thumb">
+            <div class="project-thumb-grid"></div>
+            <span class="project-thumb-label">Agriculture &amp; Data</span>
+            <span class="project-num">01 / 02</span>
+          </div>
+          <div class="project-body">
+            <div class="project-header">
+              <div class="project-title">Team A360 Slide Deck</div>
+              <a href="#" class="project-link-btn" aria-label="View project">↗</a>
+            </div>
+            <div class="project-tags">
+              <span class="project-tag">Data Analysis</span>
+              <span class="project-tag">Visualization</span>
+              <span class="project-tag">Data Cleaning</span>
+              <span class="project-tag">Transformation</span>
+            </div>
+            <p class="project-desc">Collaborated with team to produce slides on Agriculture as a Global Opportunity. Enhancing Agricultural Productivity Through Technology in Nigeria. Presented using Google Slides.</p>
+          </div>
+        </div>
+
+        <div class="project-card reveal" style="transition-delay:0.1s">
+          <div class="project-thumb">
+            <div class="project-thumb-grid"></div>
+            <span class="project-thumb-label">Web &amp; E-commerce</span>
+            <span class="project-num">02 / 02</span>
+          </div>
+          <div class="project-body">
+            <div class="project-header">
+              <div class="project-title">Westeserve Landing Page</div>
+              <a href="#" class="project-link-btn" aria-label="View project">↗</a>
+            </div>
+            <div class="project-tags">
+              <span class="project-tag">Graphic Design</span>
+              <span class="project-tag">WordPress</span>
+              <span class="project-tag">CMS</span>
+              <span class="project-tag">Database Mgmt</span>
+            </div>
+            <p class="project-desc">Designed a responsive website for Westeserve, a growing e-commerce brand for home and office electrical devices. Built on WordPress with external hosting.</p>
+          </div>
+        </div>
+
+        <div class="project-card add-card reveal" style="transition-delay:0.15s">
+          <div class="add-inner">
+            <div class="add-circle">+</div>
+            <span class="add-label">Add Project</span>
+          </div>
+        </div>
+
+        <div class="project-card add-card reveal" style="transition-delay:0.2s">
+          <div class="add-inner">
+            <div class="add-circle">+</div>
+            <span class="add-label">Add Project</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <section class="page-section" id="experience">
+    <div class="container">
+      <div class="section-eyebrow">03 — Experience</div>
+      <h2 class="section-title reveal">Career <span class="accent">timeline</span></h2>
+      <div class="exp-list">
+
+        <div class="exp-item reveal">
+          <div class="exp-left">
+            <div class="exp-date">2020 – 2023</div>
+            <div class="exp-company">Garment Care Limited</div>
+          </div>
+          <div>
+            <div class="exp-role">Assistant Engineering Manager</div>
+            <p class="exp-desc">Reduced turnaround time for breakdowns by 40% by implementing root cause identification strategies and enhancing daily record-keeping practices. Implemented robust electrical protection and safety frameworks — reducing costly equipment failure by 80%.</p>
+            <div class="exp-tags">
+              <span class="exp-tag">Electrical Safety</span>
+              <span class="exp-tag">Project Management</span>
+              <span class="exp-tag">Leadership</span>
+              <span class="exp-tag">Excel</span>
+              <span class="exp-tag">Electric Motors</span>
+              <span class="exp-tag">PLC</span>
+              <span class="exp-tag">Load Balancing</span>
+              <span class="exp-tag">Wiring Schemes</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="exp-item reveal" style="transition-delay:0.08s">
+          <div class="exp-left">
+            <div class="exp-date">2023 – Present</div>
+            <div class="exp-company">Westeserve</div>
+          </div>
+          <div>
+            <div class="exp-role">Technical Officer</div>
+            <p class="exp-desc">Led the design of the Westeserve landing page — including the e-commerce store, backend backup, and migration of the entire site to a new hosting provider. Led cross-functional teams and delegated installation tasks across multiple locations.</p>
+            <div class="exp-tags">
+              <span class="exp-tag">Project Management</span>
+              <span class="exp-tag">Data Science</span>
+              <span class="exp-tag">Python</span>
+              <span class="exp-tag">SQL</span>
+              <span class="exp-tag">AWS / Jupyter</span>
+              <span class="exp-tag">IoT</span>
+              <span class="exp-tag">Automation</span>
+              <span class="exp-tag">Solar / Inverter</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="exp-item reveal" style="transition-delay:0.16s">
+          <div class="exp-left">
+            <div class="exp-date">2024 – Present</div>
+            <div class="exp-company">Chivita Hollandia</div>
+          </div>
+          <div>
+            <div class="exp-role">Shift Maintenance Engineer</div>
+            <p class="exp-desc">Designed and produced planned maintenance schedules and process documentation — reducing overall production cost by 30%. Led teams in the successful installation and commissioning of various food processing and packaging machines.</p>
+            <div class="exp-tags">
+              <span class="exp-tag">Engineering H&amp;S</span>
+              <span class="exp-tag">ASCI Devices</span>
+              <span class="exp-tag">Servo Motors &amp; Drives</span>
+              <span class="exp-tag">Pneumatic Control</span>
+              <span class="exp-tag">Steam Generation</span>
+              <span class="exp-tag">Pumps &amp; Valves</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <section class="page-section" id="education">
+    <div class="container">
+      <div class="section-eyebrow">04 — Education</div>
+      <h2 class="section-title reveal">Academic <span class="accent">foundations</span></h2>
+      <div class="edu-grid">
+
+        <div class="edu-card reveal">
+          <div class="edu-year">2008 – 2013</div>
+          <div class="edu-degree">B.Eng Chemical Engineering</div>
+          <div class="edu-school">Enugu State University of Science and Technology</div>
+          <div class="edu-divider"></div>
+          <p class="edu-desc">Process Flow, Thermodynamics, Fluid Mechanics, Quantum Theory, Engineering Mathematics.</p>
+        </div>
+
+        <div class="edu-card reveal" style="transition-delay:0.1s">
+          <div class="edu-year">2016</div>
+          <div class="edu-degree">Mechatronics</div>
+          <div class="edu-school">Institute for Industrial Technology</div>
+          <div class="edu-divider"></div>
+          <p class="edu-desc">PLC, VSD, Machine Tools, Electromechanical, Metal Works and Fabrication.</p>
+        </div>
+
+        <div class="edu-card reveal" style="transition-delay:0.2s">
+          <div class="edu-year">2025 – 2026</div>
+          <div class="edu-degree">Data Science</div>
+          <div class="edu-school">ALX · Professional Foundation</div>
+          <div class="edu-divider"></div>
+          <p class="edu-desc">Python, R, Tableau, SQL, Jupyter Notebook, Power BI, Machine Learning.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider" style="margin-top:0;"></div>
+
+  <footer>
+    <span class="footer-name">Chukwunonso Onovo</span>
+    <span class="footer-copy">© 2025 · Data Scientist · Engineer · Lagos, NG</span>
+  </footer>
+
+  <script>
+    const themeBtn = document.getElementById('themeBtn');
+    const html = document.documentElement;
+    const saved = localStorage.getItem('theme') || 'light';
+    html.setAttribute('data-theme', saved);
+
+    themeBtn.addEventListener('click', () => {
+      const next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+    });
+
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+
+    function closeMobile() { mobileMenu.classList.remove('open'); }
+
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 76, behavior: 'smooth' });
+        }
+      });
+    });
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
